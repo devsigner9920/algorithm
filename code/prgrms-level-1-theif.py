@@ -4,16 +4,17 @@ def solution(n, lost, reserve):
     lost.sort()
     reserve.sort()
 
-    for re in reserve:
-        a = lost.count(re - 1)
-        b = lost.count(re + 1)
+    solArr = []
 
-        if a == 1:
-            lost.remove(re - 1)
-            answer += 1
-        elif b == 1:
-            lost.remove(re + 1)
-            answer += 1
+    for ln in lost:
+        if reserve.count(ln - 1) == 1 and solArr.count(ln - 1) == 0:
+            solArr.append(ln - 1)
+            continue
+        elif reserve.count(ln + 1) == 1 and solArr.count(ln + 1) == 0:
+            solArr.append(ln + 1)
+            continue
+
+    answer += len(solArr)
 #################################################################################
 ####################### NOT RESOLVED!!!!!!!!!!!!!!!!!!!!! #######################
 #################################################################################
