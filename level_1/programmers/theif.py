@@ -1,25 +1,22 @@
 def solution(n, lost, reserve):
-    answer = 0
     answer = n - len(lost)
-    lost.sort()
-    reserve.sort()
 
-    solArr = []
-
-    for ln in lost:
-        if reserve.count(ln - 1) == 1 and solArr.count(ln - 1) == 0:
-            solArr.append(ln - 1)
+    intersection = set(lost) & set(reserve)
+    lost = list(set(lost) - intersection)
+    reserve = list(set(reserve) - intersection)
+    answer += len(intersection)
+    while len(lost) != 0:
+        item = lost.pop(0)
+        if reserve.count(item - 1) > 0:
+            reserve.remove(item - 1)
+            answer += 1
             continue
-        elif reserve.count(ln + 1) == 1 and solArr.count(ln + 1) == 0:
-            solArr.append(ln + 1)
+        if reserve.count(item + 1) > 0:
+            reserve.remove(item + 1)
+            answer += 1
             continue
-
-    answer += len(solArr)
-#################################################################################
-####################### NOT RESOLVED!!!!!!!!!!!!!!!!!!!!! #######################
-#################################################################################
     return answer
 
 
-print(solution(5, [2, 4], [1, 3, 5]))
+print(solution(5,[1, 2, 3],[2, 3, 4]))
 
