@@ -1,6 +1,7 @@
 def solution(scoville, K):
     answer = 0
 
+    scoville
 
     return answer
 
