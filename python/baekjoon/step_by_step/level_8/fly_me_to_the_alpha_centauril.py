@@ -1,1 +1,1 @@
-print(sum(range(1, 4)))
+# do nginx install and configuration
