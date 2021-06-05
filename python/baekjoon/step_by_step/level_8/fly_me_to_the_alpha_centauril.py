@@ -1,1 +1,0 @@
-# do nginx install and configuration
