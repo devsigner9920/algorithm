@@ -9,6 +9,3 @@ def solution(n):
         if cnt[i]:
             c += 1
     return c
-
-
-print(solution(50))
