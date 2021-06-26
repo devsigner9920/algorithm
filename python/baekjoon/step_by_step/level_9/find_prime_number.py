@@ -1,11 +1,21 @@
-def prime_num(n):
-    sieve = [True] * n
+n = int(input())
+num_list = list(map(int, input().split()))
 
-    m = int(n ** 0.5)
-    for i in range(2, m + 1):
-        if sieve[i] == True:
-            for j in range(i + i, n, i):
-                sieve[j] = False
-    return [i for i in range(2, n) if sieve[i]] == True
+def find_prime_num(numbers):
+    max_num = max(numbers)
+    prime_num_list = [True] * (max_num + 1)
+    
+    for i in range(2, int(max_num ** 0.5) + 1):
+        if prime_num_list:
+            for j in range(i + i, max_num + 1, i):
+                prime_num_list[j] = False
+    cnt = 0
+    for num in num_list:
+        if num < 2:
+            continue
+        if prime_num_list[num]:
+            cnt += 1
+    return cnt
 
-print(prime_num(11))
+
+print(find_prime_num(num_list))
