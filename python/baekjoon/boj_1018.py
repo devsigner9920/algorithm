@@ -1,15 +1,3 @@
-"""
-8 8
-WBWBWBWB
-BWBWBWBW
-WBWBWBWB
-BWBBBWBW
-WBWBWBWB
-BWBWBWBW
-WBWBWBWB
-BWBWBWBW
-"""
-
 from sys import stdin
 
 n, m = map(int, stdin.readline().rstrip().split())
