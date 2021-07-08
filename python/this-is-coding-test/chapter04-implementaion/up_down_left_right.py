@@ -5,27 +5,41 @@
 # 입력 예시
 # 5
 # R R R U D D
-
+x, y = 1, 1
 n = int(input())
-plan_list = list(input().split())
-x = 1
-y = 1
-for plan in plan_list:
-    if plan == "L":
-        tmp = x - 1
-        if tmp:
-            x = tmp
-    if plan == "R":
-        tmp = x + 1
-        if tmp <= n:
-            x = tmp
-    if plan == "U":
-        tmp = y - 1
-        if tmp:
-            y = tmp
-    if plan == "D":
-        tmp = y + 1
-        if tmp <= n:
-            y = tmp
+plan_list = input().split()
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
+move_types = ['L', 'R', 'U', 'D']
 
-print(y, x)
+for plan in plan_list: # 플랜리스트 만큼 반복
+    for i in range(len(move_types)):
+        # 이동 후 좌표 구하기
+        if plan == move_types[i]:
+            nx = x + dx[i]
+            ny = y + dy[i]
+    # 범위 벗어날 경우 예외처리
+    if nx == 0 or nx > n or ny == 0 or ny > n:
+        continue
+    # 이동 수행
+    x, y = nx, ny
+
+# for plan in plan_list:
+#     if plan == "L":
+#         tmp = x - 1
+#         if tmp:
+#             x = tmp
+#     if plan == "R":
+#         tmp = x + 1
+#         if tmp <= n:
+#             x = tmp
+#     if plan == "U":
+#         tmp = y - 1
+#         if tmp:
+#             y = tmp
+#     if plan == "D":
+#         tmp = y + 1
+#         if tmp <= n:
+#             y = tmp
+
+print(x, y)
