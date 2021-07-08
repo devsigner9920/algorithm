@@ -5,18 +5,27 @@
 # 입력 예시
 # 5
 # R R R U D D
-data = {
-    "x": 1,
-    "y": 1,
-    "L": -1,
-    "R": 1,
-    "U": -1,
-    "D":1
-}
-#x, y = 1
 
 n = int(input())
-plan_list = list(map(int, input().split()))
-
+plan_list = list(input().split())
+x = 1
+y = 1
 for plan in plan_list:
-    print(plan)
+    if plan == "L":
+        tmp = x - 1
+        if tmp:
+            x = tmp
+    if plan == "R":
+        tmp = x + 1
+        if tmp <= n:
+            x = tmp
+    if plan == "U":
+        tmp = y - 1
+        if tmp:
+            y = tmp
+    if plan == "D":
+        tmp = y + 1
+        if tmp <= n:
+            y = tmp
+
+print(y, x)
