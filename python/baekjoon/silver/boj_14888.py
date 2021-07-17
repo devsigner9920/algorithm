@@ -1,33 +1,40 @@
-from itertools import permutations
-
-n = int(input())
-o = ['+', '-', '*', '/']
-num = list(map(int, input().split()))
-op = list(map(int, input().split()))  # + - * /
-oper = []
-oper = []
-for i in range(4):
-    for j in range(op[i]):
-        oper.append(o[i])
-
-oper = list(set(permutations(oper, len(oper))))  # 중복제거
-
-answer = []
-for i in oper:
-    n = num[0]
-    for j in range(len(num) - 1):
-        if i[j] == '+':
-            n += num[j + 1]
-        elif i[j] == '-':
-            n -= num[j + 1]
-        elif i[j] == '*':
-            n *= num[j + 1]
+def dfs(index,res):
+    global minAns
+    global maxAns
+    # 계산의 끝에 도달했을 때 최댓값과 최솟값이 될 수 있는지 판단한다.
+    if index==N-1:
+        if minAns > res:
+            minAns = res
+        if maxAns < res:
+            maxAns = res
+        return res
+    # 백트래킹 DFS로 순회
+    for i in range(4):
+        temp = res
+        if operator[i]==0:
+            continue
+        if i==0:
+            res+=numArr[index+1]
+        elif i==1:
+            res-=numArr[index+1]
+        elif i==2:
+            res*=numArr[index+1]
         else:
-            if n // num[j + 1] < 0:
-                n = -(-n // num[j + 1])
+            if res<0:
+                res = abs(res)//numArr[index+1]*-1
             else:
-                n = n // num[j + 1]
+                res //=numArr[index+1]
+        operator[i] -= 1
+        dfs(index+1,res)
+        operator[i] += 1
+        res = temp
 
-    answer.append(n)
-print(max(answer))
-print(min(answer))
+N = int(input())
+numArr = list(map(int,input().split()))
+operator = list(map(int,input().split()))
+minAns = float('Inf')
+maxAns = float('-Inf')
+
+dfs(0,numArr[0])
+print(maxAns)
+print(minAns)
