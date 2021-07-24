@@ -1,23 +1,15 @@
 text = input()
-
-text_list = []
-tag_list = []
-
-is_valid = True
 valid_text = ''
 
-tag_index = 0
-for spell in text:
-    if spell in ['<', '>']:
-        tag_list.append(tag_index)
-    tag_index += 1
+while text:
+    start = text.find('<')
+    end = text.find('>')
 
-for i in range(0, len(tag_list), 2):
-    #print(tag_list[i], tag_list[i + 1])
-    valid_text += text[:tag_list[i]][::-1] + text[tag_list[i]:tag_list[i + 1] + 1]
-    print(valid_text)
-    text = text[tag_list[i + 1] + 1:]
-    print(text)
-    if i == 0: break
+    if start != -1:
+        valid_text += ' '.join(list(map(lambda x: x[::-1], text[:start].split()))) + text[start:end + 1]
+        text = text[end + 1:]
+    else:
+        valid_text += ' '.join(list(map(lambda x: x[::-1], text.split())))
+        break
 
 print(valid_text)
