@@ -1,24 +1,28 @@
 import sys
 
-num = 1000001
-arr = [True for _ in range(num)]
-for i in range(2, int((num-1)**0.5)+1):
-    if arr[i]:
-        for k in range(i+i, num, i):
-            arr[k] = False
+def isPrime(x) :
+    if x == 1 :
+        return False
+    for i in range(2, int(x**(0.5))+1) :
+        if x%i == 0 :
+            return False
+    return True
 
-while True:
-    n = int(sys.stdin.readline())
-
-    if n == 0:
-        break
-
-    flag = 0
-
-    for a in range(3, len(arr)):
-        if arr[a] and arr[n-a]:
-            print(str(n) + " = " + str(a) + " + " + str(n-a))
-            flag = 1
-            break
-    if flag == 0:
+n = int(sys.stdin.readline())
+while(n!=0) :
+    for k in range(3, n-2, 2) :
+        if isPrime(k) :
+            a = k
+            b = n-a
+            if isPrime(b) :
+                Goldbach = True
+                break
+            else :
+                Goldbach = False
+        else :
+            Goldbach = False
+    if Goldbach :
+        print('{} = {} + {}'.format(n, a, b))
+    else :
         print("Goldbach's conjecture is wrong.")
+    n = int(sys.stdin.readline())
