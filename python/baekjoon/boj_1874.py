@@ -1,27 +1,31 @@
 import sys
 
-n = int(sys.stdin.readline().rstrip())
+input = sys.stdin.readline
 
-nums = [i for i in range(1, n + 1)]
+n = int(input())
+targets = [int(input()) for _ in range(n)]
 
-stack1 = []
-stack2 = []
-result = []
-for _ in range(n):
-    temp = int(sys.stdin.readline().rstrip())
-    while nums.count(temp):
-        # push
-        stack1.append(nums.pop(0))
-        result.append("+")
+flag = True
+stack, answer, current = [], [], 0
 
-    # pop
-    if stack1[-1] == temp:
-        stack2.append(stack1.pop())
-        result.append("-")
+for target in targets:
+    while True:
+        if stack and stack[-1] == target:
+            answer.append('-')
+            stack.pop()
+            break
 
+        elif current > target:
+            flag = False
 
-if stack1:
-    print("NO")
-else:
-    for item in result:
-        print(item)
+        else:
+            current += 1
+            stack.append(current)
+            answer.append('+')
+
+        if not flag:
+            print('NO')
+            exit()
+
+if flag:
+    print('\n'.join(answer))
