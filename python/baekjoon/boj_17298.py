@@ -1,17 +1,15 @@
+import sys
 n = int(input())
-nums = list(map(int, input().split()))
-stack = [0]
-result = [-1 for _ in range(n)]
+A = list(map(int, sys.stdin.readline().split()))
+answer = [-1] * n
+stack = []
 
+
+stack.append(0)
 for i in range(1, n):
-    while stack:
-        if nums[stack[-1]] < nums[i]:
-            tmp = stack.pop()
-            result[tmp] = nums[i]
-        else:
-            break
-
+    while stack and A[stack[-1]] < A[i]:
+        answer[stack.pop()] = A[i]
     stack.append(i)
 
 
-print(' '.join(map(str, result)))
+print(*answer)
