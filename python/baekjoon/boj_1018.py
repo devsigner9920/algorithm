@@ -1,15 +1,26 @@
-from sys import stdin
+N, M = map(int, input().split())
+original = []
+count = []
 
-n, m = map(int, stdin.readline().rstrip().split())
-chess = [stdin.readline().rstrip() for _ in range(n)]
+for _ in range(N):
+    original.append(input())
 
-test = ''
-for i in range(n - 7):
-    for j in range(m - 7):
-        for k in range(i, i + 8):
-            for l in range(j, j + 8):
-                test += chess[k][l]
-            test += '\n'
-        test += '==========================\n'
+for a in range(N-7):
+    for b in range(M-7):
+        index1 = 0
+        index2 = 0
+        for i in range(a, a+8):
+            for j in range(b, b+8):
+                if (i+j) % 2 == 0:
+                    if original[i][j] != 'W':
+                        index1 += 1
+                    if original[i][j] != 'B':
+                        index2 += 1
+                else:
+                    if original[i][j] != 'B':
+                        index1 += 1
+                    if original[i][j] != 'W':
+                        index2 += 1
+        count.append(min(index1, index2))
 
-print(test)
+print(min(count))
