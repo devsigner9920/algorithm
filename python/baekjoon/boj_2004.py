@@ -1,12 +1,24 @@
-def count_num(n, num):
-    count = 0
-    div_num = num
-    while n >= div_num:
-        count = count + (n // div_num)
-        div_num = div_num * num
-
-    return count
+def five_count(n):
+    answer = 0
+    while n != 0:
+        n = n // 5
+        answer += n
+    return answer
 
 
-M, N = map(int, input().split())
-print(min(count_num(M, 5) - count_num(N, 5) - count_num(M-N, 5), count_num(M, 2) - count_num(N, 2) - count_num(M-N, 2)))
+# n!의 2 개수 세는 함수
+def two_count(n):
+    answer = 0
+    while n != 0:
+        n = n // 2
+        answer += n
+    return answer
+
+
+n, m = map(int, input().split())
+
+if m == 0:
+    print(0)
+
+else:
+    print(min(two_count(n) - two_count(m) - two_count(n - m), five_count(n) - five_count(m) - five_count(n - m)))
