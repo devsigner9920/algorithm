@@ -1,10 +1,9 @@
-n = int(input())
-cnt = 0
-six_n = 666
-while True:
-    if '666' in str(six_n):
-        cnt += 1
-    if cnt == n:
-        print(six_n)
-        break
-    six_n += 1
+N = int(input())
+first = 666#처음 666인 수
+while N != 0:# N 이 0이 아니면 계속 반복
+    if '666' in str(first): # 만약 666이란 문자열이 문자열(first)안에 있으면
+        N = N-1# N을 1 감소시키고
+        if N == 0:# 만약 N 이 0이면
+            break# 반복문을 탈출한다.
+    first = first + 1#first의 값을 1 증가시킨다.
+print(first)
